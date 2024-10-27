@@ -1,15 +1,15 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, NavLink } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link, NavLink, useNavigate } from 'react-router-dom'; // Import Link from react-router-dom
 import { fetchUserDetails, logoutUser } from '../authSlice';
 import { useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 const navigation = [
   { name: 'Dashboard', href: '/', current: true },
   { name: 'Add Images', href: '/add-image', current: false },
   { name: 'Reorder Images', href: '/image-reorder', current: false },
-  { name: 'Image Gallery', href: 'image-gallery', current: false },
 ];
 
 function classNames(...classes) {
@@ -20,7 +20,7 @@ export default function Nav() {
     const dispatch = useDispatch()
     const user = useSelector((state) => state.auth.user); // Update with the correct path to user state
     const authTokens = useSelector((state) => state.auth.authTokens);
-    
+    const navigate = useNavigate()
     useEffect(() => {
         if (authTokens) {
             dispatch(fetchUserDetails());
@@ -28,6 +28,8 @@ export default function Nav() {
     }, [authTokens, dispatch]);
   const handleLogout = () => {
         dispatch(logoutUser());
+        toast.success("User Logged out")
+        navigate('/login');
       };
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -69,14 +71,7 @@ export default function Nav() {
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <button
-              type="button"
-              className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-            >
-              <span className="absolute -inset-1.5" />
-              <span className="sr-only">View notifications</span>
-              <BellIcon aria-hidden="true" className="h-6 w-6" />
-            </button>
+            
 
             {/* Profile dropdown */}
             <Menu as="div" className="relative ml-3">

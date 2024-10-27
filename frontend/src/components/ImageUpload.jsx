@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { uploadImages } from '../imageSlice';
 import api from '../api';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const ImageUpload = () => {
   const [files, setFiles] = useState([]);
@@ -10,6 +11,7 @@ const ImageUpload = () => {
   const [orders, setOrders] = useState({});
   const dispatch = useDispatch();
   const [status, setStatus] = useState('');
+  const navigate = useNavigate()
 
   const handleFileChange = (e) => {
     const uploadedFiles = Array.from(e.target.files);
@@ -23,13 +25,6 @@ const ImageUpload = () => {
     setTitles(newTitles);
   };
 
-  const handleTitleChange = (index, e) => {
-    setTitles((prevTitles) => ({ ...prevTitles, [index]: e.target.value }));
-  };
-
-  const handleOrderChange = (index, e) => {
-    setOrders((prevOrders) => ({ ...prevOrders, [index]: e.target.value }));
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,8 +43,11 @@ const ImageUpload = () => {
         },
       });
       setStatus(response.data.message);
+      toast.success(response.data.message)
+      navigate('/')
     } catch (error) {
       setStatus('Error uploading images');
+      toast.error('Error uploading images',error)
     }
   };
 
@@ -74,7 +72,7 @@ const ImageUpload = () => {
                 type="text"
                 placeholder="Title"
                 value={titles[index] || ''}
-                onChange={(e) => handleTitleChange(index, e)}
+                readOnly
                 className="w-full mt-2 p-2 border border-gray-300 rounded focus:outline-none focus:border-indigo-500"
               />
 
@@ -82,7 +80,7 @@ const ImageUpload = () => {
                 type="number"
                 placeholder="Order"
                 value={orders[index] || index}
-                onChange={(e) => handleOrderChange(index, e)}
+                readOnly
                 className="w-full mt-2 p-2 border border-gray-300 rounded focus:outline-none focus:border-indigo-500"
               />
             </div>

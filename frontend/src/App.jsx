@@ -19,7 +19,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} >
-            <Route path="/image-gallery" element={<ImageGallery />} />
+            <Route path="" element={<ImageGallery />} />
             <Route path="/image-reorder" element={<ImageReorder />} />
             <Route path="/add-image" element={<ImageUpload />} />
             <Route path="/reset-password" element={<ResetPassword />} />

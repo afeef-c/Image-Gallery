@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchImages, deleteImage, updateImageTitle } from '../imageSlice'; // Import update action
 import { FaTrashAlt, FaTimes, FaEdit, FaCheck, FaBan } from 'react-icons/fa';
