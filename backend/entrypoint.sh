@@ -23,8 +23,6 @@ echo "Running migrations..."
 /py/bin/python manage.py migrate --noinput || { echo "Migration failed"; exit 1; }
 
 # Collect static files
-echo "Collecting static files..."
-/py/bin/python manage.py collectstatic --noinput || { echo "Collecting static files failed"; exit 1; }
 
 # Start Nginx in the background
 echo "Starting Nginx..."
