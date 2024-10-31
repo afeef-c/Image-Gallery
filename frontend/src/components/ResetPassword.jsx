@@ -16,7 +16,8 @@ function ResetPassword() {
       toast.success('Password reset successful!');
       navigate('/login'); // Redirect to login page after success
     } catch (error) {
-      const errorMsg = error.response?.data?.error || 'An error occurred during password reset.';
+      const errorMsg = error.response?.data?.detail || 'An error occurred during password reset.';
+      
       toast.error(errorMsg);
     } finally {
       setLoading(false);
