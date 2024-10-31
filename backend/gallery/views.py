@@ -62,15 +62,27 @@ class ResetPasswordView(APIView):
 
     def post(self, request, *args, **kwargs):
         serializer = ResetPasswordSerializer(data=request.data, context={'request': request})
-        print("Data: ",request.data)
-        print("serialized: ",serializer)
+        
+        # Log the request data for debugging
+        print("Data: ", request.data)
+        
         if serializer.is_valid():
             user = request.user
+            
+            # Check if the current password matches
+            current_password = serializer.validated_data.get('current_password')
+            if not user.check_password(current_password):
+                return Response({"detail": "Current password is incorrect"}, status=status.HTTP_400_BAD_REQUEST)
+                
+            # Set the new password if current password matches
             user.set_password(serializer.validated_data['new_password'])
             user.save()
             return Response({"detail": "Password updated successfully"}, status=status.HTTP_200_OK)
-        print("Error! ",serializer.errors)
+
+        # Log serializer errors for debugging
+        print("Error! ", serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 class CurrentUserView(generics.RetrieveUpdateAPIView):
