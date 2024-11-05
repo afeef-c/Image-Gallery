@@ -1,0 +1,29 @@
+# Ignore environment files
+.env
+.env.*
+
+# Ignore AWS credentials
+*.pem
+aws_credentials.json
+
+# Ignore Django specific files
+__pycache__/
+*.py[cod]
+*.sqlite3
+
+# Ignore secret keys and sensitive configurations
+config/settings_secrets.py
+
+# Ignore node_modules for React
+node_modules/
+
+# Ignore build artifacts
+build/
+dist/
+
+# Ignore IDE and OS files
+.vscode/
+.idea/
+*.log
+*.DS_Store
+Thumbs.db
