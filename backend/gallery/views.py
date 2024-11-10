@@ -106,9 +106,6 @@ class ImageUploadView(APIView):
         titles = request.data.getlist('titles')   # Get titles, assumed to be a list
         orders = request.data.getlist('orders')   # Get orders, assumed to be a list
         
-        print("Received Images:", images)
-        print("Received Titles:", titles)
-        print("Received Orders:", orders)
 
         # Check if lengths match
         if len(images) != len(titles) or len(images) != len(orders):
@@ -128,15 +125,12 @@ class ImageUploadView(APIView):
             serializer_data = {'title': title, 'image': image, 'order': order}
             serializer = ImageSerializer(data=serializer_data)
 
-            # Debug: Print data being sent to the serializer
-            print("Serializer Data:", serializer_data)
 
             if serializer.is_valid():
                 # Save data with current user
                 serializer.save(user=request.user)
             else:
                 # Debug: Print serializer errors
-                print("Serializer Errors:", serializer.errors)
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         return Response({'message': 'Images uploaded successfully!'}, status=status.HTTP_201_CREATED)
@@ -159,4 +153,5 @@ class UpdateImageOrderView(APIView):
         Image.objects.bulk_update(images, ['order'])
 
         return Response({"message": "Image order updated successfully"}, status=status.HTTP_200_OK)
+
 

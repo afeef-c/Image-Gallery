@@ -3,6 +3,7 @@ import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchImages, updateImageOrder } from "../imageSlice";
+import Loading from "./Loading";
 
 const ItemType = {
   IMAGE: "image",
@@ -95,11 +96,12 @@ const ImageReorder = () => {
     dispatch(updateImageOrder(imageList));
   };
 
-  if (status === "loading") return <div>Loading...</div>;
+  if (status === "loading") return <Loading/>;
   if (error) return <div>Error: {error}</div>;
 
   return (
     <DndProvider backend={HTML5Backend}>
+      {images.length === 0 ? (<p>No images found in your Gallery add images</p>) : null}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
         {imageList.map((image, index) => (
           <ImageItem
@@ -110,6 +112,7 @@ const ImageReorder = () => {
           />
         ))}
       </div>
+      {images.length > 0 && 
       <div className="flex justify-center mt-4">
         <button
           onClick={saveReorderedImages}
@@ -118,6 +121,7 @@ const ImageReorder = () => {
           Save Order
         </button>
       </div>
+      }
     </DndProvider>
   );
 };

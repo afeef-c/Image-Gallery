@@ -2,10 +2,13 @@ import  { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchImages, deleteImage, updateImageTitle } from '../imageSlice'; // Import update action
 import { FaTrashAlt, FaTimes, FaEdit, FaCheck, FaBan } from 'react-icons/fa';
+import Loading from './Loading';
+import { H2Icon } from '@heroicons/react/24/outline';
 
 const ImageGallery = () => {
   const dispatch = useDispatch();
-  const { images } = useSelector((state) => state.images);
+  const { images, status, error } = useSelector((state) => state.images);
+  
   const [selectedImage, setSelectedImage] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState('');
@@ -43,11 +46,14 @@ const ImageGallery = () => {
     setIsEditing(false);
     setNewTitle(''); // Clear the title field
   };
+  if (status === "loading") return <Loading/>;
 
   return (
     <div className="p-4">
+      {images.length === 0 ? (<p>No images found in your Gallery add images</p>) : null}
       {/* Image Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
         {images.map((image) => (
           <div
             key={image.id}
@@ -65,6 +71,7 @@ const ImageGallery = () => {
             <p className="text-center text-sm font-medium mt-2 text-gray-800">{image.title}</p>
           </div>
         ))}
+
       </div>
 
       {/* Modal Popup */}

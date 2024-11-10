@@ -10,6 +10,7 @@ import ImageGallery from './components/ImageGallery';
 import ImageReorder from './components/sample';
 import ResetPassword from './components/ResetPassword';
 import ImageUpload from './components/ImageUpload';
+import Nav from './components/Nav';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
   return (
     <>
       <Router>
+        <Nav/>
         <Routes>
           <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} >
             <Route path="" element={<ImageGallery />} />

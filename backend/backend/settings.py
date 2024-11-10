@@ -7,10 +7,12 @@ import os
 import dj_database_url
 
 
+
+
 load_dotenv()
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 AUTH_USER_MODEL = 'gallery.CustomUser'
 
@@ -18,7 +20,7 @@ AUTH_USER_MODEL = 'gallery.CustomUser'
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG')
+DEBUG = os.getenv('DEBUG')==True
 
 ALLOWED_HOSTS = ['*']
 CORS_ALLOWED_ORIGINS = [
@@ -29,7 +31,8 @@ CORS_ALLOWED_ORIGINS = [
 
 ]
 
-CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWS_CREDENTIALS = True 
 
 
 # Application definition
@@ -42,12 +45,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    'storages',
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
+    
 
     'gallery',
-    'storages',
 
 
 ]
@@ -90,6 +94,13 @@ DATABASES = {
     )
     
 }
+
+STORAGES = {"default": {"BACKEND": "backend.storages.PublicMediaStorage"},
+            "staticfiles": {
+                "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+            },
+            }
+
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -132,10 +143,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 WHITENOISE_USE_FINDERS = True  # Automatically finds static files in static directories
 
 
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
@@ -145,7 +152,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
 
@@ -158,21 +165,23 @@ EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD') 
 
-
-# Load AWS settings from environment variables
+# AWS settings for both Static and Media files
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME','techmentor-media')
-AWS_S3_SIGNATURE_NAME = os.getenv('AWS_S3_SIGNATURE_NAME')
-AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME')
-AWS_S3_FILE_OVERWRITE = os.getenv('AWS_S3_FILE_OVERWRITE') == 'True'  
-AWS_DEFAULT_ACL = os.getenv('AWS_DEFAULT_ACL')
-AWS_S3_VERIFY = os.getenv('AWS_S3_VERIFY') == 'True'  
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME', 'image-gallery-files')
+AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME', 'ap-southeast-2')
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+
+AWS_S3_USE_SSL = True
+AWS_S3_VERIFY = True
+
 MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
-
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
+MEDIA_ROOT = 'media'
 
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+
+AWS_S3_FILE_OVERWRITE = False  
+AWS_DEFAULT_ACL = None  

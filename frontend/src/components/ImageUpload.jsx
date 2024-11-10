@@ -9,6 +9,7 @@ const ImageUpload = () => {
   const [files, setFiles] = useState([]);
   const [titles, setTitles] = useState({});
   const [orders, setOrders] = useState({});
+  const [loading, setLoading] = useState(false)
   const dispatch = useDispatch();
   const [status, setStatus] = useState('');
   const navigate = useNavigate()
@@ -28,6 +29,7 @@ const ImageUpload = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     const formData = new FormData();
 
     files.forEach((file, index) => {
@@ -42,6 +44,7 @@ const ImageUpload = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
+      setLoading(false)
       setStatus(response.data.message);
       toast.success(response.data.message)
       navigate('/')
@@ -85,14 +88,24 @@ const ImageUpload = () => {
               />
             </div>
           ))}
-
-          <button 
+          {!loading?
+          (<button 
             type="submit" 
             className="w-full py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition duration-300"
           >
             Upload Images
-          </button>
-          
+          </button>):
+          (<button
+              type="button"
+              className="bg-blue-600 text-white font-medium py-2 px-4 rounded-md opacity-50 cursor-not-allowed"
+              disabled
+          >
+              <div className="flex items-center justify-center">
+                  <div className="spinner-border animate-spin h-4 w-4 mr-2 border-t-2 border-b-2 border-white" role="status"></div>
+                  
+              </div>
+          </button>)
+          }    
           {status && (
             <p className={`text-center mt-4 ${status.includes('Error') ? 'text-red-500' : 'text-green-500'}`}>
               {status}

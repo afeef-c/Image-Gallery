@@ -24,5 +24,3 @@ class Image(models.Model):
         ordering = ['order']
 
 
-
-
