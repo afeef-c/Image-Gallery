@@ -171,7 +171,6 @@ AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME', 'image-gallery-files')
 AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME', 'ap-southeast-2')
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-<<<<<<< HEAD
 
 
 AWS_S3_USE_SSL = True
@@ -180,8 +179,6 @@ AWS_S3_VERIFY = True
 MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
 MEDIA_ROOT = 'media'
 
-=======
->>>>>>> 32e0530bb4c5ed147dd5d44719a5cf57385b3601
 
 # MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
 # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
