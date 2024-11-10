@@ -32,4 +32,4 @@ nginx -g 'daemon off;' >> /var/log/nginx/nginx.log 2>&1 &
 
 # Start Gunicorn for WSGI requests and response
 echo "Starting Gunicorn..."
-exec /py/bin/gunicorn --bind 0.0.0.0:$PORT backend.wsgi:application --workers 3
+exec /py/bin/gunicorn --bind 0.0.0.0:8000 backend.wsgi:application --workers 3
