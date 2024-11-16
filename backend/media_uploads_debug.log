@@ -1,0 +1,11 @@
+INFO 2024-11-07 09:32:19,139 autoreload Watching for file changes with StatReloader
+INFO 2024-11-07 09:32:33,928 basehttp "OPTIONS /api/images/211/ HTTP/1.1" 200 0
+INFO 2024-11-07 09:32:34,998 basehttp "DELETE /api/images/211/ HTTP/1.1" 204 0
+INFO 2024-11-07 09:33:11,653 basehttp "OPTIONS /api/upload/ HTTP/1.1" 200 0
+INFO 2024-11-07 09:33:12,963 basehttp "POST /api/upload/ HTTP/1.1" 201 43
+INFO 2024-11-07 09:33:13,045 basehttp "OPTIONS /api/images/ HTTP/1.1" 200 0
+INFO 2024-11-07 09:33:13,048 basehttp "OPTIONS /api/images/ HTTP/1.1" 200 0
+INFO 2024-11-07 09:33:13,791 basehttp "GET /api/images/ HTTP/1.1" 200 184
+INFO 2024-11-07 09:33:14,538 basehttp "GET /api/images/ HTTP/1.1" 200 184
+INFO 2024-11-07 09:38:46,568 autoreload Watching for file changes with StatReloader
+INFO 2024-11-07 09:38:56,302 autoreload D:\brot\Stock Image\backend\backend\settings.py changed, reloading.

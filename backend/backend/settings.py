@@ -14,29 +14,29 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-        },
-        'boto3': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-        },
-        'botocore': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-        },
-    },
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'console': {
+#             'class': 'logging.StreamHandler',
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['console'],
+#             'level': 'DEBUG',
+#         },
+#         'boto3': {
+#             'handlers': ['console'],
+#             'level': 'DEBUG',
+#         },
+#         'botocore': {
+#             'handlers': ['console'],
+#             'level': 'DEBUG',
+#         },
+#     },
+# }
 
 
 
@@ -189,11 +189,11 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD') 
 
 
-STORAGES = {"default": {"BACKEND": "backend.storages.PublicMediaStorage"},
-            "staticfiles": {
-                "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
-            },
-            }
+# STORAGES = {"default": {"BACKEND": "backend.storages.PublicMediaStorage"},
+#             "staticfiles": {
+#                 "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+#             },
+#             }
 
 # AWS settings for both Static and Media files
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
