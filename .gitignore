@@ -1,76 +1,29 @@
-# Byte-compiled / optimized / DLL files
+# Ignore environment files
+.env
+.env.*
+
+# Ignore AWS credentials
+*.pem
+aws_credentials.json
+
+# Ignore Django specific files
 __pycache__/
 *.py[cod]
-*$py.class
-*.manifest
-*.spec
+*.sqlite3
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+# Ignore secret keys and sensitive configurations
+config/settings_secrets.py
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
+# Ignore node_modules for React
+node_modules/
 
-# Django stuff:
+# Ignore build artifacts
+build/
+dist/
+
+# Ignore IDE and OS files
+.vscode/
+.idea/
 *.log
-local_settings.py
-
-# Scrapy stuff:
-.scrapy
-
-# Sphinx documentation
-docs/_build/
-# mkdocs documentation
-/site
-
-# PyBuilder
-.pybuilder/
-target/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# IPython
-profile_default/
-ipython_config.py
-
-# pyenv
-.python-version
-
-__pypackages__/
-
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
+*.DS_Store
+Thumbs.db
