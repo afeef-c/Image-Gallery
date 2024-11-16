@@ -49,7 +49,9 @@ const ImageUpload = () => {
       toast.success(response.data.message)
       navigate('/')
     } catch (error) {
+      console.log(error)
       setStatus('Error uploading images');
+      setLoading(false)
       toast.error('Error uploading images',error)
     }
   };

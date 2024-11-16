@@ -11,7 +11,4 @@ class PublicMediaStorage(S3Boto3Storage):
     custom_domain = settings.AWS_S3_CUSTOM_DOMAIN
     querystring_auth = False
     
-    def url(self, name):
-        # Override url method to use HTTPS and custom domain (if specified)
-        url = super().url(name)
-        return url.replace("http://", "https://") if url.startswith("http://") else url
+

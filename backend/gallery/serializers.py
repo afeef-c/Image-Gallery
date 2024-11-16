@@ -73,8 +73,6 @@ class ResetPasswordSerializer(serializers.Serializer):
     
 
 
-
-
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image

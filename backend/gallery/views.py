@@ -102,9 +102,9 @@ class ImageViewSet(viewsets.ModelViewSet):
 
 class ImageUploadView(APIView):
     def post(self, request, *args, **kwargs):
-        images = request.FILES.getlist('images')  # Get the list of files
-        titles = request.data.getlist('titles')   # Get titles, assumed to be a list
-        orders = request.data.getlist('orders')   # Get orders, assumed to be a list
+        images = request.FILES.getlist('images') 
+        titles = request.data.getlist('titles')  
+        orders = request.data.getlist('orders')  
         
 
         # Check if lengths match
