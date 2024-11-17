@@ -11,6 +11,7 @@ import ImageReorder from './components/sample';
 import ResetPassword from './components/ResetPassword';
 import ImageUpload from './components/ImageUpload';
 import Nav from './components/Nav';
+import AuthListener from './components/AuthListener';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
   return (
     <>
       <Router>
+        <AuthListener/>
         <Nav/>
         <Routes>
           <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} >

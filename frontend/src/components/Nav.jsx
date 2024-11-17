@@ -5,13 +5,13 @@ import { Link, NavLink, useNavigate } from 'react-router-dom'; // Import Link fr
 import { fetchUserDetails, logoutUser } from '../authSlice';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
-
+import { ACCESS_TOKEN,REFRESH_TOKEN } from '../constants';
 const navigation = [
   { name: 'Dashboard', href: '/', current: true },
   { name: 'Add Images', href: '/add-image', current: false },
   { name: 'Reorder Images', href: '/image-reorder', current: false },
 ];
-
+console.log("Refresh: ",localStorage.getItem(REFRESH_TOKEN) )
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
